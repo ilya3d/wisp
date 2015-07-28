@@ -28,6 +28,19 @@ return [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
+        'urlManager' => [
+            'class' => 'yii\web\UrlManager',
+            'enableStrictParsing' => false,
+            'enablePrettyUrl' => true,
+            'showScriptName' => false,
+            'routeParam' => 'url',
+            'suffix' => '/',
+            'rules' => [
+                'gii' => 'gii',
+                'debug' => 'debug',
+                'admin' => 'site/admin',
+            ],
+        ]
     ],
     'params' => $params,
 ];
