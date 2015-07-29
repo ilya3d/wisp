@@ -13,6 +13,7 @@ class m150728_104445_section extends Migration
             'alias' => Schema::TYPE_STRING . '(255) NOT NULL DEFAULT \'\'',
             'title' => Schema::TYPE_STRING . '(255) NOT NULL DEFAULT \'\'',
             'parent' => Schema::TYPE_INTEGER . ' NOT NULL DEFAULT 0',
+            'position' => Schema::TYPE_INTEGER . ' NOT NULL DEFAULT 0',
             'visible' => Schema::TYPE_BOOLEAN,
             'type' => Schema::TYPE_INTEGER . ' NOT NULL DEFAULT 0',
             'cache' => Schema::TYPE_TEXT . ' NOT NULL DEFAULT \'\''
@@ -23,7 +24,5 @@ class m150728_104445_section extends Migration
     public function safeDown()
     {
         $this->dropTable( 'section' );
-
-        return false;
     }
 }

@@ -11,6 +11,7 @@ use Yii;
  * @property string $alias
  * @property string $title
  * @property integer $parent
+ * @property integer $position
  * @property integer $visible
  * @property integer $type
  * @property string $cache
@@ -31,7 +32,7 @@ class Section extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['parent', 'visible', 'type'], 'integer'],
+            [['parent', 'position', 'visible', 'type'], 'integer'],
             [['cache'], 'required'],
             [['cache'], 'string'],
             [['alias', 'title'], 'string', 'max' => 255]
@@ -53,4 +54,57 @@ class Section extends \yii\db\ActiveRecord
             'cache' => 'Cache',
         ];
     }
+
+
+    public function save($runValidation = true, $attributeNames = null) {
+
+        $this->checkAlias();
+        $this->checkPosition();
+
+        $res = parent::save($runValidation, $attributeNames);
+
+        return $res;
+    }
+
+
+    protected function checkAlias() {
+
+        if ( !$this->alias )
+            $this->alias = $this->title ?: 'section';
+
+        $alias = substr( $this->alias, 0, 60 );
+
+        $i = '';
+        do {
+            $this->alias = $alias.$i;
+
+            $res = self::find()
+                ->andWhere( ['alias' => $this->alias] )
+                ->andWhere( ['<>', 'id', (int)$this->id] )
+                ->one();
+
+            $i++;
+        } while ( $res );
+
+    }
+
+
+    protected function checkPosition() {
+
+        if ( !$this->parent || $this->position )
+            return true;
+
+        // if ( $this->isAttributeChanged('position') )
+
+        /** @var self $section */
+        $section = self::find()
+            ->where( ['parent' => $this->parent] )
+            ->orderBy( ['position' => SORT_DESC] )
+            ->one();
+
+        $this->position = $section ? $section->position + 1 : 1;
+
+        return true;
+    }
+
 }
