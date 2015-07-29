@@ -1,6 +1,7 @@
 <?php
 namespace frontend\controllers;
 
+use app\models\Section;
 use Yii;
 use common\models\LoginForm;
 use frontend\models\PasswordResetRequestForm;
@@ -73,7 +74,30 @@ class SiteController extends Controller
     public function actionAdmin()
     {
         $this->layout = 'admin';
+
+        $section = Section::getByAlias( 'root' );
+
+        // gen test tree
+        if ( !$section ) {
+            $root = Section::create( 'root', 0 );
+            var_dump( $root );
+            $a = Section::create( 'a', $root );
+            $a1 = Section::create( 'a1', $a );
+            $a2 = Section::create( 'a2', $a );
+            $a3 = Section::create( 'a3', $a );
+            $b = Section::create( 'b', $root );
+            $b1 = Section::create( 'b1', $b );
+            $b2 = Section::create( 'b2', $b );
+        }
+
+
+
         return $this->render('admin');
+    }
+
+    public function actionPage()
+    {
+        return $this->render('page');
     }
 
 

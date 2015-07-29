@@ -49,6 +49,7 @@ class Section extends \yii\db\ActiveRecord
             'alias' => 'Alias',
             'title' => 'Title',
             'parent' => 'Parent',
+            'position' => 'Position',
             'visible' => 'Visible',
             'type' => 'Type',
             'cache' => 'Cache',
@@ -105,6 +106,26 @@ class Section extends \yii\db\ActiveRecord
         $this->position = $section ? $section->position + 1 : 1;
 
         return true;
+    }
+
+
+    public static function getByAlias( $alias ) {
+        return self::findOne([ 'alias' => $alias ]);
+    }
+
+
+    public static function create( $title, $parent = 0, $type = 0, $visible = 0, $alias = '' ) {
+
+        $section = new self();
+        $section->title = $title;
+        $section->parent = $parent;
+        $section->type = $type;
+        $section->visible = $visible;
+        $section->alias = $alias;
+        $section->cache = '1';
+        $section->position = 0;
+
+        return $section->save() ? $section->id : false;
     }
 
 }
