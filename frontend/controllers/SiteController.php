@@ -2,6 +2,7 @@
 namespace frontend\controllers;
 
 use app\models\Section;
+use app\models\TreeSection;
 use Yii;
 use common\models\LoginForm;
 use frontend\models\PasswordResetRequestForm;
@@ -80,7 +81,6 @@ class SiteController extends Controller
         // gen test tree
         if ( !$section ) {
             $root = Section::create( 'root', 0 );
-            var_dump( $root );
             $a = Section::create( 'a', $root );
             $a1 = Section::create( 'a1', $a );
             $a2 = Section::create( 'a2', $a );
@@ -97,7 +97,14 @@ class SiteController extends Controller
 
     public function actionPage()
     {
-        return $this->render('page');
+
+        $url =  Yii::$app->getRequest()->getQueryParams();
+        $list = explode( '/', $url['url'] );
+        $section = TreeSection::findSection( $list );
+
+        return $this->render( 'page', [
+            'section' => Section::findOne(['id' => $section])
+        ] );
     }
 
 
