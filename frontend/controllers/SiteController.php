@@ -15,8 +15,9 @@ use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 
+
 /**
- * Site controller
+ * Controller for public layout
  */
 class SiteController extends Controller
 {
@@ -69,44 +70,14 @@ class SiteController extends Controller
 
     public function actionIndex()
     {
-        return $this->render('index');
-    }
-
-    public function actionAdmin()
-    {
-        $this->layout = 'admin';
-
-        $section = Section::getByAlias( 'root' );
-
-        // gen test tree
-        if ( !$section ) {
-            $root = Section::create( 'root', 0 );
-            $a = Section::create( 'a', $root );
-            $a1 = Section::create( 'a1', $a );
-            $a2 = Section::create( 'a2', $a );
-            $a3 = Section::create( 'a3', $a );
-            $b = Section::create( 'b', $root );
-            $b1 = Section::create( 'b1', $b );
-            $b2 = Section::create( 'b2', $b );
-        }
-
-
-
-        return $this->render('admin');
-    }
-
-    public function actionPage()
-    {
-
         $url =  Yii::$app->getRequest()->getQueryParams();
-        $list = explode( '/', $url['url'] );
+        $list = isSet($url['url']) ? explode( '/', $url['url'] ) : [];
         $section = TreeSection::findSection( $list );
 
         return $this->render( 'page', [
             'section' => Section::findOne(['id' => $section])
         ] );
     }
-
 
     public function actionLogin()
     {

@@ -38,8 +38,9 @@ return [
             'rules' => [
                 'gii' => 'gii',
                 'debug' => 'debug',
-                'admin' => 'site/admin',
-                '<url:\S+>' => 'site/page'
+                'admin' => 'admin/index',
+                'admin/<page:\S+>' => 'admin/index',
+                '<url:\S+>' => 'site/index'
             ],
         ]
     ],
