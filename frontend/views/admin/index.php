@@ -6,8 +6,6 @@ $this->title = 'Admin';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="site-about">
-    <h1><?= Html::encode($this->title) ?></h1>
-
-    <p>todo tree section</p>
-
+    <div class="col-md-4"><?= frontend\widgets\SectionTree::widget([]) ?></div>
+    <div class="col-md-8">section parameters</div>
 </div>
