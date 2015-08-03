@@ -39,7 +39,7 @@ return [
                 'gii' => 'gii',
                 'debug' => 'debug',
                 'admin' => 'admin/index',
-                'admin/<page:\S+>' => 'admin/index',
+                'admin/<page:\S+>' => 'admin/<page>',
                 '<url:\S+>' => 'site/index'
             ],
         ]

@@ -60,6 +60,7 @@ class AdminController extends Controller
      */
     public function actions()
     {
+        $this->layout = 'admin';
         return [
             'error' => [
                 'class' => 'yii\web\ErrorAction',
@@ -73,7 +74,6 @@ class AdminController extends Controller
 
     public function actionIndex()
     {
-        $this->layout = 'admin';
 
         $section = Section::getByAlias( 'root' );
 
@@ -92,6 +92,26 @@ class AdminController extends Controller
 
 
         return $this->render('index');
+    }
+
+
+    public function actionSection() {
+        return $this->actionIndex();
+    }
+
+
+    public function actionTemplate() {
+        return $this->actionIndex();
+    }
+
+
+    public function actionNews() {
+        return $this->render('news');
+    }
+
+
+    public function actionCatalog() {
+        return $this->actionIndex();
     }
 
 }
