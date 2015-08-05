@@ -1,11 +1,29 @@
-<ul class="list-group">
-
-    <?= \yii\helpers\Html::tag('li', $tree['title'], ['class'=>'list-group-item']) ?>
-    <? foreach($tree['child'] as $node): ?>
-        <?= \yii\helpers\Html::tag('li', ' - ' . $node['title'], ['class'=>'list-group-item']) ?>
-        <? foreach($node['child'] as $node2): ?>
-            <?= \yii\helpers\Html::tag('li', ' -- ' . $node2['title'], ['class'=>'list-group-item']) ?>
-        <? endforeach ?>
-    <? endforeach ?>
-
-</ul>
+<div class="dd">
+    <ol class="dd-list">
+        <li class="dd-item" data-id="<?= $tree['id'] ?>">
+            <div class="dd-handle"><?= $tree['title'] ?></div>
+            <ol class="dd-list">
+                <? foreach($tree['child'] as $node): ?>
+                <li class="dd-item" data-id="<?= $tree['id'] ?>">
+                    <div class="dd-handle"><?= $node['title'] ?></div>
+                    <ol class="dd-list">
+                        <? foreach($node['child'] as $node2): ?>
+                            <li class="dd-item" data-id="<?= $tree['id'] ?>">
+                                <div class="dd-handle"><?= $node2['title'] ?></div>
+                            </li>
+                        <? endforeach ?>
+                    </ol>
+                </li>
+                <? endforeach ?>
+            </ol>
+        </li>
+    </ol>
+</div>
+<?php
+$js = <<<JS
+    $(document).ready(function(){
+        $('.dd').nestable();//.on('change', updateOutput)
+    });
+JS;
+$this->registerJs($js);
+?>
