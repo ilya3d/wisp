@@ -1,11 +1,11 @@
 <?php
 
-namespace frontend\widgets;
-
+namespace frontend\widgets\page;
 
 use app\models\TreeSection;
 
-class SectionTree extends \yii\bootstrap\Widget {
+
+class Menu extends \yii\bootstrap\Widget {
 
     protected $tree = [];
 
@@ -14,7 +14,7 @@ class SectionTree extends \yii\bootstrap\Widget {
     }
 
     public function run() {
-        return $this->render('SectionTree', ['tree' => $this->tree]);
+        return $this->render('Menu', ['tree' => $this->tree]);
     }
 
 }

@@ -3,7 +3,9 @@ use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 /* @var $section \app\models\Section */
-$this->title = 'Admin';
+$this->title = 'page';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<p><?= $section->title ?></p>
+<h1><?= $section->title ?></h1>
+<?= frontend\widgets\page\Menu::widget([]) ?>
+<?= frontend\widgets\page\Content::widget([]) ?>
