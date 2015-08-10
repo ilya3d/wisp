@@ -7,6 +7,6 @@ use yii\helpers\Html;
 $this->title = 'page';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<h1><?= $section->title ?></h1>
-<?= frontend\widgets\page\Menu::widget([]) ?>
+<h1><?= $page->getSection()->title ?></h1>
+<?= frontend\widgets\page\Menu::widget(['page' => $page]) ?>
 <?= frontend\widgets\page\Content::widget([]) ?>

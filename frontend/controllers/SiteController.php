@@ -79,8 +79,7 @@ class SiteController extends Controller
     public function actionIndex()
     {
         return $this->render( 'page', [
-            'page' => $this->page,
-            'section' => Section::findOne(['id' => $this->page->getSection()])
+            'page' => $this->page
         ] );
     }
 

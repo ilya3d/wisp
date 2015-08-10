@@ -2,12 +2,13 @@
 
 namespace frontend\core;
 
+use app\models\Section;
 use app\models\TreeSection;
 
 
 class Page {
 
-    protected $url = [];
+    protected $url = [];// path
 
     protected $tree = null;
 
@@ -26,8 +27,18 @@ class Page {
     }
 
 
-    public function getSection() {
+    public function section() {
         return $this->section;
+    }
+
+
+    public function getSection() {
+        return Section::findOne(['id' => $this->section()]);
+    }
+
+
+    public function getPath() {
+        return $this->url;
     }
 
 }

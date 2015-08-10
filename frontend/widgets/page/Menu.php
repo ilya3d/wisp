@@ -2,19 +2,19 @@
 
 namespace frontend\widgets\page;
 
-use app\models\TreeSection;
+use frontend\core\Page;
 
 
 class Menu extends \yii\bootstrap\Widget {
 
-    protected $tree = [];
+    /** @var Page */
+    public $page = null;
 
     public function init() {
-        $this->tree = TreeSection::build();
     }
 
     public function run() {
-        return $this->render('Menu', ['tree' => $this->tree]);
+        return $this->render('Menu', ['path' => $this->page->getPath()]);
     }
 
 }
