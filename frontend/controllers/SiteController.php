@@ -3,6 +3,7 @@ namespace frontend\controllers;
 
 use app\models\Section;
 use app\models\TreeSection;
+use frontend\core\Page;
 use Yii;
 use common\models\LoginForm;
 use frontend\models\PasswordResetRequestForm;
@@ -21,6 +22,10 @@ use yii\filters\AccessControl;
  */
 class SiteController extends Controller
 {
+
+    /** @var Page $page */
+    protected $page = null;
+
     /**
      * @inheritdoc
      */
@@ -57,6 +62,9 @@ class SiteController extends Controller
      */
     public function actions()
     {
+
+        $this->page = new Page();
+
         return [
             'error' => [
                 'class' => 'yii\web\ErrorAction',
@@ -70,12 +78,9 @@ class SiteController extends Controller
 
     public function actionIndex()
     {
-        $url =  Yii::$app->getRequest()->getQueryParams();
-        $list = isSet($url['url']) ? explode( '/', $url['url'] ) : [];
-        $section = TreeSection::findSection( $list );
-
         return $this->render( 'page', [
-            'section' => Section::findOne(['id' => $section])
+            'page' => $this->page,
+            'section' => Section::findOne(['id' => $this->page->getSection()])
         ] );
     }
 

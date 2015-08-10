@@ -2,6 +2,7 @@
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
+/* @var $page \frontend\core\Page */
 /* @var $section \app\models\Section */
 $this->title = 'page';
 $this->params['breadcrumbs'][] = $this->title;
