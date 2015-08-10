@@ -114,6 +114,20 @@ class Section extends \yii\db\ActiveRecord
     }
 
 
+    /**
+     * Return section with id or new
+     * @param int $id Section id
+     * @return Section
+     */
+    public static function get( $id ) {
+
+        if ( $section = self::findOne(['id' => $id]) )
+            return $id;
+
+        return new self();
+    }
+
+
     public static function create( $title, $parent = 0, $type = 0, $visible = 0, $alias = '' ) {
 
         $section = new self();

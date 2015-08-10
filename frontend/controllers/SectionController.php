@@ -3,6 +3,7 @@
 namespace frontend\controllers;
 
 use app\models\Section;
+use app\models\SectionForm;
 use Yii;
 use common\models\LoginForm;
 use frontend\models\PasswordResetRequestForm;
@@ -18,10 +19,10 @@ use yii\filters\AccessControl;
 
 /**
  * Controller for admin layout
- * Class AdminController
+ * Class SectionController
  * @package frontend\controllers
  */
-class AdminController extends Controller
+class SectionController extends Controller
 {
     /**
      * @inheritdoc
@@ -94,23 +95,28 @@ class AdminController extends Controller
     }
 
 
-    public function actionSection() {
-        return $this->actionIndex();
+    public function actionEdit() {
+
+        $id = Yii::$app->request->get('id');
+
+        $this->getView()->title = 'Section Edit';
+
+        $section = Section::get( $id );
+
+        $form = new SectionForm();
+
+        if ( $form->load( \Yii::$app->request->post()) && $form->validate() ) {
+
+            $section->title = $form->title;
+
+            $section->save();
+        }
+
+        return $this->render('edit', [
+            'form' => $form,
+            'section' => $section
+        ]);
     }
 
-
-    public function actionTemplate() {
-        return $this->actionIndex();
-    }
-
-
-    public function actionNews() {
-        return $this->render('news');
-    }
-
-
-    public function actionCatalog() {
-        return $this->actionIndex();
-    }
 
 }
