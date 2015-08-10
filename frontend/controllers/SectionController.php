@@ -105,11 +105,20 @@ class SectionController extends Controller
 
         $form = new SectionForm();
 
-        if ( $form->load( \Yii::$app->request->post()) && $form->validate() ) {
+        if ( $form->load( \Yii::$app->request->post() ) && $form->validate() ) {
 
             $section->title = $form->title;
+            $section->alias = $form->alias;
+            $section->parent = $form->parent;
 
-            $section->save();
+            if ( !($id = $section->save()) ) {
+                $error = !$id ? $section->errors : '';
+                foreach( $error as $field => $msg )
+                    Yii::$app->session->setFlash( 'error', implode( '\n', $msg ) );
+            } else {
+                return $this->redirect( ['index'] );
+            }
+
         }
 
         return $this->render('edit', [

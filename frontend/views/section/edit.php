@@ -3,6 +3,7 @@
  * @var $this yii\web\View
  * @var $form app\models\SectionForm
  */
+use \app\models\Section;
 use yii\bootstrap\ActiveForm;
 use yii\helpers\Html;
 
@@ -16,13 +17,15 @@ use yii\helpers\Html;
             'action'=>'/admin/section/edit/',
             //'options' => ['data-pjax' => true,'enctype' => 'multipart/form-data' ],
         ]); ?>
-        <div class="col-1">
+        <div class="row">
             <?= Html::submitButton('save',['class'=>'btn btn-success']) ?>
             <?= Html::a('back', '/admin/section/', ['class'=>'btn btn-warning']) ?>
         </div>
-        <div class="col-l">
+
             <?= $showForm->field($form,'title')->label('Title') ?>
-        </div>
+            <?= $showForm->field($form,'alias')->label('Alias') ?>
+            <?= $showForm->field($form,'parent')->label('Parent')->dropDownList( Section::getList() ) ?>
+
         <?php ActiveForm::end(); ?>
     </div>
 </div>

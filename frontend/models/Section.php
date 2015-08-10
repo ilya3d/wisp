@@ -33,7 +33,7 @@ class Section extends \yii\db\ActiveRecord
     {
         return [
             [['parent', 'position', 'visible', 'type'], 'integer'],
-            [['cache'], 'required'],
+            //[['cache'], 'required'],
             [['cache'], 'string'],
             [['alias', 'title'], 'string', 'max' => 255]
         ];
@@ -61,6 +61,8 @@ class Section extends \yii\db\ActiveRecord
 
         $this->checkAlias();
         $this->checkPosition();
+
+        $this->cache = '';
 
         $res = parent::save($runValidation, $attributeNames);
 
@@ -125,6 +127,21 @@ class Section extends \yii\db\ActiveRecord
             return $id;
 
         return new self();
+    }
+
+
+    /**
+     * Section full list (as array id - title)
+     * @return array
+     */
+    public static function getList() {
+
+        $out = [];
+
+        foreach ( self::find()->each() as $section )
+            $out[$section->id] = $section->title;
+
+        return $out;
     }
 
 
