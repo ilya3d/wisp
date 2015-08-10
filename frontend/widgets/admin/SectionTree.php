@@ -2,8 +2,8 @@
 
 namespace frontend\widgets\admin;
 
+use frontend\core\TreeSection;
 
-use app\models\TreeSection;
 
 class SectionTree extends \yii\bootstrap\Widget {
 

@@ -1,8 +1,6 @@
 <?php
 namespace frontend\controllers;
 
-use app\models\Section;
-use app\models\TreeSection;
 use frontend\core\Page;
 use Yii;
 use common\models\LoginForm;

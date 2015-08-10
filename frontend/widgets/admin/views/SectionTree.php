@@ -1,15 +1,18 @@
+<?
+/* @var \frontend\core\SectionNode $tree */
+?>
 <div class="dd">
     <ol class="dd-list">
-        <li class="dd-item" data-id="<?= $tree['id'] ?>">
-            <div class="dd-handle"><?= $tree['title'] ?></div>
+        <li class="dd-item" data-id="<?= $tree->id ?>">
+            <div class="dd-handle"><?= $tree->title ?></div>
             <ol class="dd-list">
-                <? foreach($tree['child'] as $node): ?>
-                <li class="dd-item" data-id="<?= $tree['id'] ?>">
-                    <div class="dd-handle"><?= $node['title'] ?></div>
+                <? foreach( $tree->getChild() as $node ): ?>
+                <li class="dd-item" data-id="<?= $node->id ?>">
+                    <div class="dd-handle"><?= $node->title ?></div>
                     <ol class="dd-list">
-                        <? foreach($node['child'] as $node2): ?>
-                            <li class="dd-item" data-id="<?= $tree['id'] ?>">
-                                <div class="dd-handle"><?= $node2['title'] ?></div>
+                        <? foreach( $node->getChild() as $node2 ): ?>
+                            <li class="dd-item" data-id="<?= $node2->id ?>">
+                                <div class="dd-handle"><?= $node2->title ?></div>
                             </li>
                         <? endforeach ?>
                     </ol>

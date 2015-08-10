@@ -3,7 +3,6 @@
 namespace frontend\controllers;
 
 use app\models\Section;
-use app\models\TreeSection;
 use Yii;
 use common\models\LoginForm;
 use frontend\models\PasswordResetRequestForm;

@@ -3,7 +3,6 @@
 namespace frontend\core;
 
 use app\models\Section;
-use app\models\TreeSection;
 
 
 class Page {
@@ -22,8 +21,32 @@ class Page {
         $url = \Yii::$app->getRequest()->getQueryParams();
         $this->url = isSet($url['url']) ? explode( '/', $url['url'] ) : [];
 
-        $this->section = TreeSection::findSection( $this->url );
+        $this->section = $this->findSection();
 
+    }
+
+
+    protected function findSection() { // todo to TreeSection
+
+        /** @var SectionNode $node */
+        $node = &$this->tree;
+
+        foreach ( $this->url as $alias ) {
+
+            $flag = false;
+
+            foreach ( $node->getChild() as $curNode )
+                if ( $curNode->alias == $alias ) {
+                    $flag = true;
+                    $node = &$curNode;
+                    break;
+                }
+
+            if ( !$flag )
+                break;
+        }
+
+        return $node->id;
     }
 
 
