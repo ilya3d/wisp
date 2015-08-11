@@ -1,26 +1,24 @@
 <?
+use yii\helpers\Html;
 /* @var \frontend\core\SectionNode $tree */
 ?>
 <div class="dd">
-    <ol class="dd-list">
-        <li class="dd-item" data-id="<?= $tree->id ?>">
-            <div class="dd-handle"><?= $tree->title ?></div>
-            <ol class="dd-list">
-                <? foreach( $tree->getChild() as $node ): ?>
-                <li class="dd-item" data-id="<?= $node->id ?>">
-                    <div class="dd-handle"><?= $node->title ?></div>
-                    <ol class="dd-list">
-                        <? foreach( $node->getChild() as $node2 ): ?>
-                            <li class="dd-item" data-id="<?= $node2->id ?>">
-                                <div class="dd-handle"><?= $node2->title ?></div>
-                            </li>
-                        <? endforeach ?>
-                    </ol>
-                </li>
-                <? endforeach ?>
-            </ol>
-        </li>
-    </ol>
+
+<?
+    function getNode( $node ) {
+
+        $out = '';
+        foreach( $node->getChild() as $child ) {
+            $out .= getNode( $child );
+        }
+        $out = Html::tag( 'div', $node->title, ['class'=>"dd-handle"]) .
+            Html::tag( 'ol', $out, ['class'=>'dd-list']);
+
+        return Html::tag( 'li', $out, ['class'=>"dd-item", 'data-id'=>$node->id ] );
+    }
+
+    echo Html::tag( 'ol', getNode( $tree ), ['class'=>'dd-list']);
+?>
 </div>
 <?php
 $js = <<<JS

@@ -17,9 +17,9 @@ use yii\helpers\Html;
             'action'=>'/admin/section/edit/',
             //'options' => ['data-pjax' => true,'enctype' => 'multipart/form-data' ],
         ]); ?>
-        <div class="row">
-            <?= Html::submitButton('save',['class'=>'btn btn-success']) ?>
+        <div class="form-group text-right">
             <?= Html::a('back', '/admin/section/', ['class'=>'btn btn-warning']) ?>
+            <?= Html::submitButton('save',['class'=>'btn btn-success']) ?>
         </div>
 
             <?= $showForm->field($form,'title')->label('Title') ?>
