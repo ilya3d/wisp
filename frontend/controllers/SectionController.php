@@ -8,6 +8,7 @@ use Yii;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
+use frontend\core\TreeSection;
 
 
 /**
@@ -82,9 +83,10 @@ class SectionController extends Controller
             $b2 = Section::create( 'b2', $b );
         }
 
-
-
-        return $this->render('index');
+        $tree = TreeSection::build();
+        return $this->render('index', [
+            'tree' => $tree
+        ]);
     }
 
 
@@ -97,6 +99,10 @@ class SectionController extends Controller
         $section = Section::get( $id );
 
         $form = new SectionForm();
+
+        $form->title = $section->title;
+        $form->alias = $section->alias;
+        $form->parent = $section->parent;
 
         if ( $form->load( \Yii::$app->request->post() ) && $form->validate() ) {
 

@@ -124,7 +124,7 @@ class Section extends \yii\db\ActiveRecord
     public static function get( $id ) {
 
         if ( $section = self::findOne(['id' => $id]) )
-            return $id;
+            return $section;
 
         return new self();
     }
