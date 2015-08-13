@@ -101,17 +101,20 @@ class SectionController extends Controller
         $form = new SectionForm();
 
         $form->title = $section->title;
+        $form->id = $section->id;
         $form->alias = $section->alias;
         $form->parent = $section->parent;
 
         if ( $form->load( \Yii::$app->request->post() ) && $form->validate() ) {
 
+            $section = Section::get( $form->id );
+
             $section->title = $form->title;
             $section->alias = $form->alias;
             $section->parent = $form->parent;
 
-            if ( !($id = $section->save()) ) {
-                $error = !$id ? $section->errors : '';
+            if ( !$section->save() ) {
+                $error = $section->errors;
                 foreach( $error as $field => $msg )
                     Yii::$app->session->setFlash( 'error', implode( '\n', $msg ) );
             } else {
@@ -126,5 +129,19 @@ class SectionController extends Controller
         ]);
     }
 
+
+    public function actionDelete( $id ) {
+
+        if ( $section = Section::get( $id ) ) {
+
+            $section->delete();
+
+            return $this->redirect( ['index'] );
+
+        } else
+
+        Yii::$app->session->setFlash( 'error', 'Section not found' );
+
+    }
 
 }

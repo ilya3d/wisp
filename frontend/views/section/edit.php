@@ -22,6 +22,7 @@ use yii\helpers\Html;
             <?= Html::submitButton('save',['class'=>'btn btn-success']) ?>
         </div>
 
+            <?= $showForm->field($form,'id')->hiddenInput()->label('') ?>
             <?= $showForm->field($form,'title')->label('Title') ?>
             <?= $showForm->field($form,'alias')->label('Alias') ?>
             <?= $showForm->field($form,'parent')->label('Parent')->dropDownList( Section::getList() ) ?>

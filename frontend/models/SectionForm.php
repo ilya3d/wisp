@@ -7,6 +7,7 @@ use yii\base\Model;
 
 class SectionForm extends Model {
 
+    public $id;
     public $title;
     public $alias;
     public $parent;
@@ -29,8 +30,8 @@ class SectionForm extends Model {
     public function rules() {
         return [
             [['title','alias'], 'string'],
-            [['parent'], 'integer'],
-            [['alias','title'], 'required']
+            [['id','parent'], 'integer'],
+            [['alias','title','parent'], 'required']
         ];
     }
 
