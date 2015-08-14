@@ -144,4 +144,14 @@ class SectionController extends Controller
 
     }
 
+
+    public function actionView( $id = 0 ) {
+
+        $section = Section::get( $id );
+
+        return $this->render( 'view', [
+            'section' => $section
+        ] );
+    }
+
 }
