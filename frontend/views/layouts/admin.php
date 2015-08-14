@@ -34,6 +34,7 @@ AppAsset::register($this);
     ]);
     $menuItems = [
         ['label' => 'Section', 'url' => ['section/index']],
+        ['label' => 'Design Grid', 'url' => ['designgrid/index']],
         ['label' => ''],
         ['label' => 'News', 'url' => ['/admin/news']],
         ['label' => 'Catalog', 'url' => ['/admin/catalog']],
