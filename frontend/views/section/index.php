@@ -9,7 +9,10 @@ use yii\helpers\Html;
 $this->title = 'Admin';
 ?>
 <div class="site-about">
-    <div class="col-md-4"><?= frontend\widgets\admin\SectionTree::widget([]) ?></div>
+    <div class="col-md-4">
+        <?= frontend\widgets\admin\SectionList::widget([]) ?>
+        <?= frontend\widgets\admin\SectionTree::widget([]) ?>
+    </div>
     <div class="col-md-8">
         <div class="form-group text-right">
             <?= Html::a('new', '/admin/section/edit/', ['class'=>'btn btn-success']) ?>

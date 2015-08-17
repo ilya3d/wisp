@@ -8,9 +8,9 @@ use yii\bootstrap\ActiveForm;
 use yii\helpers\Html;
 
 ?>
-
+<h3><?= $section->title ?></h3>
 <div class="site-about">
-    <div class="col-md-4"><h1><?= $section->title ?></h1><?= frontend\widgets\admin\SectionTree::widget([]) ?></div>
+    <div class="col-md-4"><?= frontend\widgets\admin\SectionList::widget([]) ?></div>
     <div class="col-md-8">
 
         <ul class="nav nav-tabs" role="tablist">

@@ -9,7 +9,7 @@ use yii\helpers\Html;
 
 ?>
 <div class="site-about">
-    <div class="col-md-4"><?= frontend\widgets\admin\SectionTree::widget([]) ?></div>
+    <div class="col-md-4"><?= frontend\widgets\admin\SectionList::widget([]) ?></div>
     <div class="col-md-8">
         <?php $showForm = ActiveForm::begin([
             'id' => 'section-form',
