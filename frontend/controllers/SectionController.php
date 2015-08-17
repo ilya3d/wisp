@@ -149,6 +149,12 @@ class SectionController extends Controller
 
         $section = Section::get( $id );
 
+        if ( !$section->id ) {
+            Yii::$app->session->setFlash( 'error', 'Section not found' );
+            return $this->redirect( ['index'] );
+        }
+
+
         return $this->render( 'view', [
             'section' => $section
         ] );
