@@ -156,7 +156,7 @@ class SectionController extends Controller
 
 
         return $this->render( 'view', [
-            'section' => $section
+            'section' => $section,
         ] );
     }
 

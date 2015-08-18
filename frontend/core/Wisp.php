@@ -2,6 +2,9 @@
 
 namespace frontend\core;
 
+use Yii;
+
+
 /**
  * Base class
  * Class Wisp
@@ -21,9 +24,11 @@ class Wisp
     }
 
 
-    public static function showModule( $module ) {
+    public static function showModule( $name ) {
 
-        return $module;
+        $module = Yii::$app->getModule( 'content' );
+
+        return $module->runAction('admin/index');
     }
 
 
